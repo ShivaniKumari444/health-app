@@ -1,0 +1,13 @@
+<header class="header-bar">
+  <div class="logo">HealthApp</div>
+  <nav class="nav-links" [class.open]="menuOpen" aria-label="Main navigation">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/profile" routerLinkActive="active">Profile</a>
+  </nav>
+  <button class="menu-toggle" (click)="menuOpen = !menuOpen" aria-label="Toggle navigation" aria-expanded="{{menuOpen}}">
+    <span [class.open]="menuOpen"></span>
+    <span [class.open]="menuOpen"></span>
+    <span [class.open]="menuOpen"></span>
+  </button>
+</header>
