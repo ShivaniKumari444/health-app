@@ -1,5 +1,12 @@
 <header class="header-bar">
-  <div class="logo">HealthApp</div>
+  <div class="logo">
+    <svg class="logo-svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="18" fill="#2563eb"/>
+      <path d="M18 7L27 29H9L18 7Z" fill="#fff"/>
+      <circle cx="18" cy="18" r="5" fill="#2563eb"/>
+    </svg>
+    <span class="logo-text">HealthApp</span>
+  </div>
   <nav class="nav-links" [class.open]="menuOpen" aria-label="Main navigation">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
     <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
