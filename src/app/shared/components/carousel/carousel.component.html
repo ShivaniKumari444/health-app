@@ -1,0 +1,43 @@
+<div class="carousel-wrapper"
+     (mouseenter)="onMouseEnter()"
+     (mouseleave)="onMouseLeave()"
+     (focus)="onFocus()"
+     (blur)="onBlur()"
+     (touchstart)="onTouchStart($event)"
+     (touchend)="onTouchEnd($event)"
+     tabindex="0"
+     aria-live="polite">
+  <div class="carousel-slide-list">
+    @for (slide of slides; track slide.image; let i = $index) {
+      <div class="carousel-slide"
+           [class.active]="currentIndex() === i"
+           [class.prev]="currentIndex() === (i - 1 + totalSlides) % totalSlides"
+           [class.next]="currentIndex() === (i + 1) % totalSlides"
+           [attr.aria-hidden]="currentIndex() !== i"
+           [attr.tabindex]="currentIndex() === i ? 0 : -1">
+        <img [src]="slide.image"
+             [alt]="slide.alt"
+             class="carousel-img"
+             draggable="false" />
+        <div class="carousel-gradient"></div>
+        <div class="carousel-content">
+          <h1>Track Your Daily Health</h1>
+          <p>Monitor fitness, nutrition and mental wellness in one place</p>
+          <button class="carousel-cta" aria-label="Get Started">Get Started</button>
+        </div>
+      </div>
+    }
+  </div>
+  <button class="carousel-control prev" (click)="prev()" aria-label="Previous Slide"></button>
+  <button class="carousel-control next" (click)="next()" aria-label="Next Slide"></button>
+  <div class="carousel-dots">
+    @for (slide of slides; track slide.image; let i = $index) {
+      <button class="carousel-dot"
+              [class.active]="currentIndex() === i"
+              (click)="goTo(i)"
+              [attr.aria-label]="'Go to slide ' + (i + 1)"
+              [attr.aria-current]="currentIndex() === i ? 'true' : null">
+      </button>
+    }
+  </div>
+</div>

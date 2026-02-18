@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CarouselComponent } from '../../shared/components/carousel/carousel.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CarouselComponent],
   template: `
+    <app-carousel></app-carousel>
     <section class="home">
       <h1>Welcome to HealthApp</h1>
       <p class="subtitle">Your personal health management dashboard</p>
