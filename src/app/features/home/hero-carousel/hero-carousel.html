@@ -1,0 +1,61 @@
+<div class="carousel-wrapper" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+  <!-- Main carousel slide area -->
+  <div class="carousel-slide-area">
+    <div
+      class="carousel-track"
+      [style.transform]="'translateX(' + (-currentIndex() * 100) + '%)'"
+      [style.transition]="'transform 0.65s cubic-bezier(0.4, 0, 0.2, 1)'"
+    >
+      @for (image of carouselImages; track image.id) {
+        <div class="carousel-slide">
+          <img
+            [src]="image.src"
+            [alt]="image.alt"
+            class="carousel-image"
+            loading="lazy"
+          />
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Navigation buttons -->
+  <button
+    class="carousel-button prev-button"
+    (click)="prevSlide()"
+    aria-label="Previous slide"
+    type="button"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+
+  <button
+    class="carousel-button next-button"
+    (click)="nextSlide()"
+    aria-label="Next slide"
+    type="button"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+
+  <!-- Indicator dots -->
+  <div class="carousel-indicators">
+    @for (image of carouselImages; track image.id; let i = $index) {
+      <button
+        class="indicator-dot"
+        [class.active]="isActive(i)"
+        (click)="goToSlide(i)"
+        [attr.aria-label]="'Go to slide ' + (i + 1)"
+        [attr.aria-pressed]="isActive(i)"
+        type="button"
+      ></button>
+    }
+  </div>
+
+  <!-- Play/Pause button -->
+  <!-- play/pause removed — autoplay remains enabled -->
+</div>
