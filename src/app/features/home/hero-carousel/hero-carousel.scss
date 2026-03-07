@@ -1,0 +1,290 @@
+// Hero Carousel Styles
+// Responsive, accessible, and animated carousel component
+
+// Color palette
+$primary-color: #10b981;
+$secondary-color: #3b82f6;
+$text-light: #ffffff;
+$text-dark: #1f2937;
+$overlay-dark: rgba(0, 0, 0, 0.4);
+$overlay-light: rgba(0, 0, 0, 0.2);
+$border-color: rgba(255, 255, 255, 0.3);
+$shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+$shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.3);
+
+// Breakpoints
+$mobile: 320px;
+$tablet: 768px;
+$desktop: 1024px;
+$large: 1280px;
+
+// Animation keyframes
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseScale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideCarousel {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideCarouselOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+// Main container
+.hero-carousel-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: transparent;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  transition: box-shadow 0.25s ease;
+
+  @media (max-width: $tablet) {
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+  }
+
+  @media (max-width: $mobile) {
+    aspect-ratio: 1 / 1.05;
+    border-radius: 8px;
+  }
+}
+
+// Carousel slide area
+.carousel-slide-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+// Track and slides (flex track for smooth translateX sliding)
+.carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+// Carousel image
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  border-radius: inherit;
+}
+
+// removed overlay and textual content — design uses clean image-only slides
+
+// Navigation buttons: Flipkart-like smaller rounded rectangles
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  color: $text-dark;
+  cursor: pointer;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+  padding: 0;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5;
+    stroke: #0f172a;
+    fill: none;
+  }
+
+  &:hover {
+    transform: translateY(-50%) scale(1.04);
+    background: rgba(255,255,255,0.98);
+    box-shadow: 0 8px 22px rgba(2,6,23,0.08);
+  }
+
+  &:focus {
+    outline: 2px solid rgba(37,99,235,0.18);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.98);
+  }
+
+  @media (max-width: $tablet) {
+    width: 40px;
+    height: 40px;
+
+    svg { width: 16px; height: 16px; }
+  }
+
+  @media (max-width: $mobile) {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.95);
+
+    svg { width: 14px; height: 14px; }
+  }
+}
+
+// Previous button
+.prev-button { left: 12px; }
+.next-button { right: 12px; }
+
+// Indicator dots
+.carousel-indicators {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 12;
+  justify-content: center;
+}
+
+// Indicator dot
+.indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease;
+
+  &.active {
+    width: 12px;
+    height: 12px;
+    background: #0f172a;
+    box-shadow: 0 2px 6px rgba(2,6,23,0.12);
+  }
+
+  &:hover { transform: scale(1.12); background: rgba(255,255,255,0.85); }
+}
+
+/* play/pause styles removed (control removed from template) */
+
+// Accessibility: Focus visible state for keyboard navigation
+button {
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+}
+
+/* slide content animations removed (no overlay text) */
+
+// Smooth transitions
+* {
+  box-sizing: border-box;
+}
+
+// Print styles
+@media print {
+  .carousel-wrapper {
+    display: none;
+  }
+}
+
+// Prefers reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track,
+  .carousel-image,
+  .carousel-button,
+  .indicator-dot {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+// Dark mode support (if needed)
+@media (prefers-color-scheme: dark) {
+  .carousel-button {
+    background: rgba(255, 255, 255, 0.9);
+    color: $text-dark;
+  }
+}
